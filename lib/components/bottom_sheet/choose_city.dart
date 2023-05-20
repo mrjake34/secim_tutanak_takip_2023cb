@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/base/service/navigation/navigation_service.dart';
+import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/cubit/reports_cubit.dart';
 
 import '../../constants/colors/constant_colors.dart';
@@ -29,11 +31,14 @@ class ChooseCityWidget extends StatelessWidget {
               context.read<SearchStringValueProvider>().setSearchTerm =
                   value.toLowerCase();
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+                hintText: LocaleKeys.mainText_chooseCity.tr(),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor)),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor))),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary))),
           ),
           Flexible(
             child: ListView.builder(

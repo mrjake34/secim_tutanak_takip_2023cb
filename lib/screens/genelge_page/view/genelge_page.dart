@@ -110,23 +110,25 @@ class BuildScaffold extends StatelessWidget {
                   Genelge? genelge = genelgeList?[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: pagePadding),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 232, 232, 232)),
+                    child: ExpansionTile(
+                      collapsedShape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                              color: Color.fromARGB(255, 232, 232, 232)),
                           borderRadius: BorderRadius.circular(buttonRadius)),
-                      child: ExpansionTile(
-                        collapsedBackgroundColor:
-                            const Color.fromARGB(255, 250, 250, 250),
-                        title: Text(genelge?.title ?? ""),
-                        subtitle: Text(genelge?.subTitle ?? ""),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: SelectableText(genelge?.context ?? ""),
-                          )
-                        ],
-                      ),
+                      shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                              color: Color.fromARGB(255, 232, 232, 232)),
+                          borderRadius: BorderRadius.circular(buttonRadius)),
+                      collapsedBackgroundColor:
+                          Theme.of(context).colorScheme.surface,
+                      title: Text(genelge?.title ?? ""),
+                      subtitle: Text(genelge?.subTitle ?? ""),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SelectableText(genelge?.context ?? ""),
+                        )
+                      ],
                     ),
                   );
                 },

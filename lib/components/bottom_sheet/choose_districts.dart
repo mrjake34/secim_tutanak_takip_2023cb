@@ -13,13 +13,13 @@ import '../../screens/reports_page/providers/providers.dart';
 
 // ignore: must_be_immutable
 class ChooseDistrictsWidget extends StatelessWidget {
-  List? districts;
+  List districts;
   ChooseDistrictsWidget({super.key, required this.districts});
 
   @override
   Widget build(BuildContext context) {
     List? filtered = districts
-        ?.where((element) => element
+        .where((element) => element
             .toString()
             .toLowerCase()
             .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
@@ -27,8 +27,7 @@ class ChooseDistrictsWidget extends StatelessWidget {
     return BlocProvider<ReportsCubit>(
         create: (context) => ReportsCubit(),
         child: BlocConsumer<ReportsCubit, ReportsState>(
-          listener: (context, state) {
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             return BuildPage(filtered: filtered);
           },
@@ -42,7 +41,7 @@ class BuildPage extends StatelessWidget {
     required this.filtered,
   });
 
-  final List? filtered;
+  final List filtered;
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +56,25 @@ class BuildPage extends StatelessWidget {
             },
             decoration: InputDecoration(
                 hintText: LocaleKeys.mainText_chooseDistrict.tr(),
-                enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor)),
-                border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor))),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary))),
           ),
           Flexible(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: filtered?.length,
+              itemCount: filtered.length,
               itemBuilder: (context, index) {
-                AddressModel addressModel =
-                    AddressModel.fromJson(filtered?[index]);
+                AddressModel addressModel = filtered[index];
+                print(addressModel.name);
                 return Card(
                   color: cardColors,
                   child: ListTile(
                     onTap: () {
-                      context.read<ChooseCityProvider>().setCityValue =
+                      context.read<ChooseDistrictProvider>().setDistrictValue =
                           addressModel;
                       NavigationService.instance.navigateToBack();
                     },

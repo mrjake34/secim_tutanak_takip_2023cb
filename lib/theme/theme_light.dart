@@ -20,7 +20,7 @@ ThemeData lightTheme = ThemeData(
     surface: Colors.white,
     onSurface: Color.fromARGB(255, 0, 0, 0),
     //
-    tertiary: Color.fromARGB(255, 0, 0, 0),
+    tertiary: Color.fromARGB(255, 36, 160, 133),
     onTertiary: Color.fromARGB(255, 0, 0, 0),
   ),
   cardTheme: CardTheme(
@@ -30,7 +30,7 @@ ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           textStyle: const TextStyle(fontWeight: FontWeight.bold),
-          backgroundColor: const Color.fromARGB(255, 82, 196, 26),
+          backgroundColor: const Color.fromARGB(255, 36, 160, 133),
           foregroundColor: Colors.white,
           side: BorderSide.none,
           shape: RoundedRectangleBorder(

@@ -13,8 +13,8 @@ class MainOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
         style: OutlinedButton.styleFrom(
-            foregroundColor: mainColor,
-            side: const BorderSide(color: mainColor),
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            side: BorderSide(color: Theme.of(context).colorScheme.primary),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(buttonRadius))),
         onPressed: buttonFunction,

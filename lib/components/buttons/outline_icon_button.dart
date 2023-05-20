@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/colors/constant_colors.dart';
 import '../../constants/sizes/sizes.dart';
 
 class MainOutlineIconButton extends StatelessWidget {
@@ -17,8 +16,8 @@ class MainOutlineIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
         style: OutlinedButton.styleFrom(
-            foregroundColor: mainColor,
-            side: const BorderSide(color: mainColor),
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            side: BorderSide(color: Theme.of(context).colorScheme.primary),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(buttonRadius))),
         onPressed: buttonFunction,

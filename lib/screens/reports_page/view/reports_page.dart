@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
 import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/bottom_sheet_main.dart';
 import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/choose_city.dart';
+import 'package:secim_tutanak_takip_2023cb/components/buttons/main_elevated_button.dart';
 import 'package:secim_tutanak_takip_2023cb/constants/colors/constant_colors.dart';
 import 'package:secim_tutanak_takip_2023cb/constants/sizes/sizes.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/providers/providers.dart';
@@ -34,6 +35,7 @@ class _ReportsPageState extends State<ReportsPage> {
     super.initState();
     reportsCubit = ReportsCubit();
     reportsCubit.getListCities();
+    reportsCubit.getListDistricts(2);
   }
 
   @override
@@ -49,10 +51,10 @@ class _ReportsPageState extends State<ReportsPage> {
           }
           if (state is CitiesState) {
             cities = state.cities;
-          } else if (state is DistrictsState) {
+          }
+          if (state is DistrictsState) {
             districts = state.districts;
           }
-          print("Main State $state");
         },
         builder: (context, state) {
           return Scaffold(
@@ -98,8 +100,9 @@ class BuildScaffold extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: mainColor)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   height: 50,
                   child: ListTile(
                     onTap: () {
@@ -115,8 +118,9 @@ class BuildScaffold extends StatelessWidget {
                   height: 10,
                 ),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: mainColor)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   height: 50,
                   child: ListTile(
                     onTap: () {
@@ -138,8 +142,9 @@ class BuildScaffold extends StatelessWidget {
                   height: 10,
                 ),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: mainColor)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   height: 50,
                   child: ListTile(
                     onTap: () {
@@ -157,8 +162,9 @@ class BuildScaffold extends StatelessWidget {
                   height: 10,
                 ),
                 Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: mainColor)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   height: 50,
                   child: ListTile(
                     onTap: () {
@@ -172,6 +178,18 @@ class BuildScaffold extends StatelessWidget {
                         LocaleKeys.mainText_chooseSchool.tr()),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MainElevatedButton(
+                          buttonFunction: () {},
+                          buttonWidget: Text(LocaleKeys.mainText_reports.tr())),
+                    ),
+                  ],
+                )
               ],
             ),
           )
@@ -181,9 +199,10 @@ class BuildScaffold extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Center(
+                Center(
                   child: CircularProgressIndicator.adaptive(
-                    valueColor: AlwaysStoppedAnimation(mainColor),
+                    valueColor: AlwaysStoppedAnimation(
+                        Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 Text(

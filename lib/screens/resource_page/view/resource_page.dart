@@ -91,7 +91,8 @@ class BuildScaffold extends StatelessWidget {
                   width: pageSize.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(buttonRadius),
-                      border: Border.all(color: dividerColor)),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,7 +122,8 @@ class BuildScaffold extends StatelessWidget {
                   width: pageSize.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(buttonRadius),
-                      border: Border.all(color: dividerColor)),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -152,7 +154,8 @@ class BuildScaffold extends StatelessWidget {
                   width: pageSize.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(buttonRadius),
-                      border: Border.all(color: dividerColor)),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

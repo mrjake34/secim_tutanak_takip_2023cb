@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/providers/providers.dart';
+import 'package:secim_tutanak_takip_2023cb/theme/theme_dark.dart';
 
 import 'base/service/navigation/navigation_route.dart';
 import 'base/service/navigation/navigation_service.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Seçim Tutanak Takip 2023 Cb',
           theme: lightTheme,
+          darkTheme: darkTheme,
           locale: context.locale,
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
