@@ -5,14 +5,12 @@ import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.
 import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/bottom_sheet_main.dart';
 import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/choose_city.dart';
 import 'package:secim_tutanak_takip_2023cb/components/buttons/main_elevated_button.dart';
-import 'package:secim_tutanak_takip_2023cb/constants/colors/constant_colors.dart';
 import 'package:secim_tutanak_takip_2023cb/constants/sizes/sizes.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/providers/providers.dart';
 
 import '../../../components/bottom_sheet/choose_districts.dart';
 import '../../../constants/style/text_styles.dart';
-import '../cubit/reports_cubit.dart';
-import '../cubit/reports_state.dart';
+import '../model/reports_model.dart';
 
 class ReportsPage extends StatefulWidget {
   const ReportsPage({super.key});
@@ -22,72 +20,48 @@ class ReportsPage extends StatefulWidget {
 }
 
 class _ReportsPageState extends State<ReportsPage> {
-  late final ReportsCubit reportsCubit;
   List? cities;
   bool? isLoading;
   List? city;
-  List? districts;
+  List<Districts>? districts;
   List? neighborhoods;
   List? schools;
 
   @override
   void initState() {
     super.initState();
-    reportsCubit = ReportsCubit();
-    reportsCubit.getListCities();
-    reportsCubit.getListDistricts(2);
   }
 
   @override
   Widget build(BuildContext context) {
     final Size pageSize = MediaQuery.of(context).size;
-    return BlocProvider<ReportsCubit>(
-      create: (context) => reportsCubit,
-      child: BlocConsumer<ReportsCubit, ReportsState>(
-        bloc: reportsCubit,
-        listener: (context, state) {
-          if (state is StateLoading) {
-            isLoading = state.isLoading;
-          }
-          if (state is CitiesState) {
-            cities = state.cities;
-          }
-          if (state is DistrictsState) {
-            districts = state.districts;
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            body: BuildScaffold(
-              pageSize: pageSize,
-              isLoading: isLoading ?? true,
-              districts: districts ?? [],
-              neighborhoods: neighborhoods ?? [],
-              schools: schools ?? [],
-              cities: cities ?? [],
-              reportsCubit: reportsCubit,
-            ),
-          );
-        },
+    return Scaffold(
+      body: BuildScaffold(
+        pageSize: pageSize,
+        isLoading: isLoading ?? false,
+        districts: districts ?? [],
+        neighborhoods: neighborhoods ?? [],
+        schools: schools ?? [],
+        cities: cities ?? [],
       ),
     );
   }
 }
 
 class BuildScaffold extends StatelessWidget {
-  const BuildScaffold(
-      {super.key,
-      required this.pageSize,
-      required this.isLoading,
-      required this.districts,
-      required this.neighborhoods,
-      required this.schools,
-      required this.cities,
-      required this.reportsCubit});
-  final ReportsCubit reportsCubit;
+  const BuildScaffold({
+    super.key,
+    required this.pageSize,
+    required this.isLoading,
+    required this.districts,
+    required this.neighborhoods,
+    required this.schools,
+    required this.cities,
+  });
+
   final Size pageSize;
   final bool isLoading;
-  final List? districts;
+  final List<Districts>? districts;
   final List? neighborhoods;
   final List? schools;
   final List? cities;
@@ -106,8 +80,8 @@ class BuildScaffold extends StatelessWidget {
                   height: 50,
                   child: ListTile(
                     onTap: () {
-                      MainComponents().openBottomSheet(
-                          context, ChooseCityWidget(cities: cities ?? []));
+                      MainComponents()
+                          .openBottomSheet(context, ChooseCityWidget());
                     },
                     title: Text(
                         context.watch<ChooseCityProvider>().getCityValue.name ??
@@ -128,8 +102,8 @@ class BuildScaffold extends StatelessWidget {
                       // if (districts!.isNotEmpty) {
 
                       // }
-                      MainComponents().openBottomSheet(context,
-                          ChooseDistrictsWidget(districts: districts!));
+                      MainComponents()
+                          .openBottomSheet(context, ChooseDistrictsWidget());
                     },
                     title: Text(context
                             .watch<ChooseDistrictProvider>()
@@ -148,8 +122,8 @@ class BuildScaffold extends StatelessWidget {
                   height: 50,
                   child: ListTile(
                     onTap: () {
-                      MainComponents().openBottomSheet(
-                          context, ChooseCityWidget(cities: cities ?? []));
+                      MainComponents()
+                          .openBottomSheet(context, ChooseCityWidget());
                     },
                     title: Text(context
                             .watch<ChooseNeighborhoodProvider>()
@@ -168,8 +142,8 @@ class BuildScaffold extends StatelessWidget {
                   height: 50,
                   child: ListTile(
                     onTap: () {
-                      MainComponents().openBottomSheet(
-                          context, ChooseCityWidget(cities: cities ?? []));
+                      MainComponents()
+                          .openBottomSheet(context, ChooseCityWidget());
                     },
                     title: Text(context
                             .watch<ChooseSchoolProvider>()

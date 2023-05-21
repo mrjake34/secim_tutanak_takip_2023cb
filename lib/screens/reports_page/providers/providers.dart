@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/address_model.dart';
+
+import '../model/reports_model.dart';
 
 class SearchStringValueProvider extends ChangeNotifier {
   String _searchTerm = "";
@@ -27,19 +28,19 @@ class ChooseCityProvider extends ChangeNotifier {
 }
 
 class ChooseDistrictProvider extends ChangeNotifier {
-  AddressModel _district =
-      AddressModel(id: 0, name: LocaleKeys.mainText_chooseDistrict.tr());
-  List _districtList = [];
+  Districts _district =
+      Districts(id: 0, name: LocaleKeys.mainText_chooseDistrict.tr());
+  List<Districts> _districtList = [];
 
-  AddressModel get getDistrictValue => _district;
-  List get getDistrictList => _districtList;
+  Districts get getDistrictValue => _district;
+  List<Districts> get getDistrictList => _districtList;
 
-  set setDistrictList(List value) {
+  set setDistrictList(List<Districts> value) {
     _districtList = value;
     notifyListeners();
   }
 
-  set setDistrictValue(AddressModel value) {
+  set setDistrictValue(Districts value) {
     _district = value;
     notifyListeners();
   }
