@@ -1,25 +1,31 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 part of 'reports_bloc.dart';
 
 class ReportsState extends Equatable {
-  const ReportsState({this.cities = const [], this.districts = const [], this.isLoading = false});
+  ReportsState(
+      {this.cities = const [],
+      this.districts = const [],
+      this.status = const StatusInitialize(), this.model});
 
   final List cities;
-  final List districts;
-  final bool isLoading;
+  AddressModel? model;
+  final List<Districts> districts;
+  final ReportStatus? status;
 
   @override
-  List<Object> get props => [cities,districts,isLoading];
+  List<Object?> get props => [cities, districts, status];
 
   ReportsState copyWith({
     List? cities,
-    List? districts,
-    bool? isLoading,
+    List<Districts>? districts,
+    ReportStatus? status,
+    AddressModel? model,
   }) {
     return ReportsState(
       cities: cities ?? this.cities,
       districts: districts ?? this.districts,
-      isLoading: isLoading ?? this.isLoading,
+      status: status ?? this.status,
+      model: model ?? this.model,
     );
   }
 }

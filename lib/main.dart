@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/providers/providers.dart';
-import 'package:secim_tutanak_takip_2023cb/theme/theme_dark.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/reports_service.dart';
 
 import 'base/service/navigation/navigation_route.dart';
 import 'base/service/navigation/navigation_service.dart';
@@ -10,6 +11,8 @@ import 'base/service/translation/translation_service.dart';
 import 'base/service/utils/utils.dart';
 import 'screens/genelge_page/service/genelge_provider.dart';
 import 'screens/home_page/view/home_page.dart';
+import 'screens/reports_page/providers/providers.dart';
+import 'theme/theme_dark.dart';
 import 'theme/theme_light.dart';
 
 void main() {

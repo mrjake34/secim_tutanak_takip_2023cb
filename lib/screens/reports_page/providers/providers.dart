@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
+import '../../../base/service/translation/locale_keys.g.dart';
 
 import '../model/reports_model.dart';
 

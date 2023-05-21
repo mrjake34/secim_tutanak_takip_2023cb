@@ -1,39 +1,34 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:secim_tutanak_takip_2023cb/base/service/navigation/navigation_service.dart';
-import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
 
-import '../../constants/colors/constant_colors.dart';
-import '../../constants/sizes/sizes.dart';
-import '../../screens/reports_page/cubit/districts_cubit.dart';
-import '../../screens/reports_page/model/reports_model.dart';
-import '../../screens/reports_page/providers/providers.dart';
+import '../../../base/service/navigation/navigation_service.dart';
+import '../../../base/service/translation/locale_keys.g.dart';
+import '../../../constants/colors/constant_colors.dart';
+import '../../../constants/sizes/sizes.dart';
+import '../bloc/reports_bloc.dart';
+import '../model/reports_model.dart';
+import '../providers/providers.dart';
+import '../service/reports_service.dart';
 
 // ignore: must_be_immutable
 class ChooseDistrictsWidget extends StatelessWidget {
-  ChooseDistrictsWidget({
+  const ChooseDistrictsWidget({
     super.key,
   });
-  List<Districts>? _districts;
   @override
   Widget build(BuildContext context) {
-    print("List _districts $_districts");
-    List<Districts>? filtered = _districts
-        ?.where((element) => element
-            .toString()
-            .toLowerCase()
-            .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
-        .toList();
     return BlocProvider(
-      create: (context) => DistrictsCubit(),
-      child: BlocConsumer<DistrictsCubit, DistrictsState>(
-        listener: (context, state) {
-          print("State ${state.districts?.length}");
-          _districts = state.districts;
-        },
+      create: (context) =>
+          ReportsBloc(service: ReportsService(), context: context),
+      child: BlocBuilder<ReportsBloc, ReportsState>(
         builder: (context, state) {
-          return BuildPage(filtered: filtered);
+          if (state.status is StatusInitialize) {
+            context.read<ReportsBloc>().add(DistrictsFetch(
+                id: context.watch<ChooseCityProvider>().getCityValue.id ?? 0));
+          }
+          return BuildPage(districts: state.districts);
         },
       ),
     );
@@ -43,13 +38,19 @@ class ChooseDistrictsWidget extends StatelessWidget {
 class BuildPage extends StatelessWidget {
   const BuildPage({
     super.key,
-    required this.filtered,
+    required this.districts,
   });
 
-  final List<Districts>? filtered;
+  final List<Districts>? districts;
 
   @override
   Widget build(BuildContext context) {
+    List<Districts>? filtered = districts
+        ?.where((element) => element
+            .toString()
+            .toLowerCase()
+            .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
+        .toList();
     return Padding(
       padding: const EdgeInsets.all(pagePadding),
       child: Column(

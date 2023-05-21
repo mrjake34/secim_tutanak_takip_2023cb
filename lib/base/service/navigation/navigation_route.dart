@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/genelge_page/view/genelge_page.dart';
 
 import '../../../constants/navigation/navigation.dart';
+import '../../../screens/genelge_page/view/genelge_page.dart';
 import '../../../screens/home_page/view/home_page.dart';
 import '../../../screens/not_found_page/not_found_page.dart';
 

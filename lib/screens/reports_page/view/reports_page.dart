@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
-import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/bottom_sheet_main.dart';
-import 'package:secim_tutanak_takip_2023cb/components/bottom_sheet/choose_city.dart';
-import 'package:secim_tutanak_takip_2023cb/components/buttons/main_elevated_button.dart';
-import 'package:secim_tutanak_takip_2023cb/constants/sizes/sizes.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/providers/providers.dart';
-
-import '../../../components/bottom_sheet/choose_districts.dart';
+import '../../../base/service/translation/locale_keys.g.dart';
+import '../../../components/bottom_sheet/bottom_sheet_main.dart';
+import '../bloc/reports_bloc.dart';
+import '../bottom_sheets/choose_city.dart';
+import '../../../components/buttons/main_elevated_button.dart';
+import '../../../constants/sizes/sizes.dart';
+import '../providers/providers.dart';
 import '../../../constants/style/text_styles.dart';
+import '../bottom_sheets/choose_districts.dart';
 import '../model/reports_model.dart';
 
 class ReportsPage extends StatefulWidget {
@@ -28,13 +28,9 @@ class _ReportsPageState extends State<ReportsPage> {
   List? schools;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final Size pageSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: BuildScaffold(
         pageSize: pageSize,
@@ -102,8 +98,9 @@ class BuildScaffold extends StatelessWidget {
                       // if (districts!.isNotEmpty) {
 
                       // }
-                      MainComponents()
-                          .openBottomSheet(context, ChooseDistrictsWidget());
+
+                      MainComponents().openBottomSheet(
+                          context, const ChooseDistrictsWidget());
                     },
                     title: Text(context
                             .watch<ChooseDistrictProvider>()

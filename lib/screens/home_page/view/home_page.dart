@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:secim_tutanak_takip_2023cb/constants/colors/constant_colors.dart';
+import '../../../constants/colors/constant_colors.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../reports_page/view/reports_page.dart';
 import '../../resource_page/view/resource_page.dart';

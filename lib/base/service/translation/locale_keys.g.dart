@@ -67,6 +67,7 @@ abstract class  LocaleKeys {
   static const errorText_errorWhileOpenEducationalLink = 'errorText.errorWhileOpenEducationalLink';
   static const errorText_errorWhileCalling = 'errorText.errorWhileCalling';
   static const errorText_listNotLoad = 'errorText.listNotLoad';
+  static const errorText_listNotFound = 'errorText.listNotFound';
   static const errorText = 'errorText';
 
 }

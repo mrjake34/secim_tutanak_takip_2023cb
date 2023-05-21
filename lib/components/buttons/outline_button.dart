@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/colors/constant_colors.dart';
 import '../../constants/sizes/sizes.dart';
 
 class MainOutlineButton extends StatelessWidget {

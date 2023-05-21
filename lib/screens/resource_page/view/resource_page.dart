@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../base/service/navigation/navigation_service.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../../base/service/utils/utils.dart';
-import '../../../constants/colors/constant_colors.dart';
 import '../../../constants/navigation/navigation.dart';
 import '../../../constants/sizes/sizes.dart';
 import '../../../constants/style/text_styles.dart';

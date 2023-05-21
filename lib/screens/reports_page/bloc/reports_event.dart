@@ -5,32 +5,16 @@ sealed class ReportsEvent extends Equatable {}
 
 @immutable
 class CitiesFetch extends ReportsEvent {
-  List cities;
-  CitiesFetch({
-    required this.cities,
-  });
   @override
-  List<Object?> get props => [cities];
+  List<Object?> get props => [];
 }
 
 @immutable
 class DistrictsFetch extends ReportsEvent {
-  List districts;
+  int id;
   DistrictsFetch({
-    required this.districts,
+    required this.id,
   });
   @override
-  List<Object?> get props => [districts];
-
-
-}
-
-@immutable
-class IsLoading extends ReportsEvent {
-  final bool isLoading;
-  IsLoading({
-    required this.isLoading,
-  });
-  @override
-  List<Object?> get props => [isLoading];
+  List<Object?> get props => [];
 }

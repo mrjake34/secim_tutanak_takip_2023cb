@@ -71,6 +71,7 @@
         "errorWhileOpenYoutubeLink": "YouTube açılırken bir hata meydana geldi.",
         "errorWhileOpenEducationalLink": "Seçim günü dökümanları açılırken bir hata meydana geldi.",
         "errorWhileCalling": "Aramaya yönlendirilirken bir hata meydana geldi.",
-        "listNotLoad": "Liste yüklenemedi"
+        "listNotLoad": "Liste yüklenemedi",
+        "listNotFound": "Liste Bulunamadı"
     }
 }
