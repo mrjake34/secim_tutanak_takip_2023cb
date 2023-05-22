@@ -58,7 +58,8 @@
         "chooseDistrict": "İlçe Seçin",
         "chooseNeighborhood": "Mahalle Seçin",
         "chooseSchool": "Okul Seçin",
-        "listEmpty": "Liste Boş"
+        "listEmpty": "Liste Boş",
+        "fetchBallotBoxes": "Sandıkları Getir"
         
 
 
@@ -72,6 +73,10 @@
         "errorWhileOpenEducationalLink": "Seçim günü dökümanları açılırken bir hata meydana geldi.",
         "errorWhileCalling": "Aramaya yönlendirilirken bir hata meydana geldi.",
         "listNotLoad": "Liste yüklenemedi",
-        "listNotFound": "Liste Bulunamadı"
+        "listNotFound": "Liste Bulunamadı",
+        "networkNotReady": "Sunucu Aktif Değil",
+        "networkNotReadyContext": "Veri akışı henüz başlamadığı için sunucu aktif değildir. 29 Mayıs 2023 Seçim Yasaklarının bitmesiyle birlikte sunucu aktif olacaktır.",
+        "networkFailed": "Bağlantı Hatası",
+        "networkFailedContext": "Lütfen internet bağlantınızı kontrol ediniz, internet bağlantınızın olduğundan eminseniz sunucularımızda bağlantı problemi meydana gelmiştir, en kısa sürede gidermeye çalışacağız. Anlayışınız için teşekkür ederiz."
     }
 }

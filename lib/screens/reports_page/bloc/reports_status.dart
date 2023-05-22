@@ -17,3 +17,21 @@ class ReportError extends ReportStatus {
 class ReportSuccess extends ReportStatus {}
 
 class CitiesEmpty extends ReportStatus {}
+
+abstract class ServiceStatus {
+  const ServiceStatus();
+}
+
+class NetworkReady extends ServiceStatus {}
+
+class NetworkNotReady extends ServiceStatus {}
+
+class NetworkLoading extends ServiceStatus {}
+
+class NetworkError extends ServiceStatus {
+  final Object exception;
+
+  NetworkError(this.exception);
+}
+
+class NetworkFailed extends ServiceStatus {}

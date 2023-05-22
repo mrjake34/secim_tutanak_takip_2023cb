@@ -47,38 +47,38 @@ class ChooseDistrictProvider extends ChangeNotifier {
 }
 
 class ChooseNeighborhoodProvider extends ChangeNotifier {
-  AddressModel _neighborhood =
-      AddressModel(id: 0, name: LocaleKeys.mainText_chooseNeighborhood.tr());
+  Neighborhoods _neighborhood =
+      Neighborhoods(id: 0, name: LocaleKeys.mainText_chooseNeighborhood.tr());
   List _neightborhoodList = [];
 
   List get getNeightborhoodList => _neightborhoodList;
-  AddressModel get getNeighborhoodValue => _neighborhood;
+  Neighborhoods get getNeighborhoodValue => _neighborhood;
 
   set setNeightborhoodList(List value) {
     _neightborhoodList = value;
     notifyListeners();
   }
 
-  set setNeightborhoodValue(AddressModel value) {
+  set setNeightborhoodValue(Neighborhoods value) {
     _neighborhood = value;
     notifyListeners();
   }
 }
 
 class ChooseSchoolProvider extends ChangeNotifier {
-  AddressModel _school =
-      AddressModel(id: 0, name: LocaleKeys.mainText_chooseSchool.tr());
+  Schools _school =
+      Schools(id: 0, name: LocaleKeys.mainText_chooseSchool.tr());
   List _schoolList = [];
 
   List get getSchoolList => _schoolList;
-  AddressModel get getSchoolValue => _school;
+  Schools get getSchoolValue => _school;
 
   set setSchoolList(List value) {
     _schoolList = value;
     notifyListeners();
   }
 
-  set setSchoolValue(AddressModel value) {
+  set setSchoolValue(Schools value) {
     _school = value;
     notifyListeners();
   }

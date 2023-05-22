@@ -8,11 +8,11 @@ import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/reports_service.dart';
-import '../../../constants/colors/constant_colors.dart';
 import '../../../constants/sizes/sizes.dart';
 import '../../../constants/style/text_styles.dart';
 import '../model/reports_model.dart';
 import '../providers/providers.dart';
+import '../service/ballotbox_service.dart';
 
 class ChooseCityWidget extends StatelessWidget {
   ChooseCityWidget({super.key});
@@ -21,7 +21,7 @@ class ChooseCityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ReportsBloc(service: ReportsService(), context: context);
+    final bloc = ReportsBloc(service: ReportsService(), context: context, boxService: BallotBoxService());
     return BlocProvider(
         create: (context) => bloc,
         child: BlocBuilder<ReportsBloc, ReportsState>(
@@ -85,9 +85,7 @@ class BuildWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       AddressModel addressModel =
                           AddressModel.fromJson(filtered[index]);
-                      print(addressModel);
                       return Card(
-                        color: cardColors,
                         child: ListTile(
                           onTap: () {
                             context.read<ChooseCityProvider>().setCityValue =

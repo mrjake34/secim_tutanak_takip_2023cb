@@ -18,3 +18,36 @@ class DistrictsFetch extends ReportsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class NeighborhoodsFetch extends ReportsEvent {
+  int id;
+  int cityId;
+  NeighborhoodsFetch({
+    required this.id,
+    required this.cityId,
+  });
+  @override
+  List<Object?> get props => [];
+}
+
+class SchoolsFetch extends ReportsEvent {
+  int neighborhoodId;
+  int cityId;
+  int id;
+  SchoolsFetch({
+    required this.neighborhoodId,
+    required this.cityId,
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [];
+}
+
+class BallotBoxesFetch extends ReportsEvent {
+  @override
+  List<Object?> get props => [];
+}
+class ServiceEnabled extends ReportsEvent {
+  @override
+  List<Object?> get props => [];
+}

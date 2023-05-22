@@ -59,6 +59,7 @@ abstract class  LocaleKeys {
   static const mainText_chooseNeighborhood = 'mainText.chooseNeighborhood';
   static const mainText_chooseSchool = 'mainText.chooseSchool';
   static const mainText_listEmpty = 'mainText.listEmpty';
+  static const mainText_fetchBallotBoxes = 'mainText.fetchBallotBoxes';
   static const mainText = 'mainText';
   static const errorText_requiredEmailLogin = 'errorText.requiredEmailLogin';
   static const errorText_requiredPasswordLogin = 'errorText.requiredPasswordLogin';
@@ -68,6 +69,10 @@ abstract class  LocaleKeys {
   static const errorText_errorWhileCalling = 'errorText.errorWhileCalling';
   static const errorText_listNotLoad = 'errorText.listNotLoad';
   static const errorText_listNotFound = 'errorText.listNotFound';
+  static const errorText_networkNotReady = 'errorText.networkNotReady';
+  static const errorText_networkNotReadyContext = 'errorText.networkNotReadyContext';
+  static const errorText_networkFailed = 'errorText.networkFailed';
+  static const errorText_networkFailedContext = 'errorText.networkFailedContext';
   static const errorText = 'errorText';
 
 }

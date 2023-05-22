@@ -14,8 +14,8 @@ import '../service/ballotbox_service.dart';
 import '../service/reports_service.dart';
 
 // ignore: must_be_immutable
-class ChooseDistrictsWidget extends StatelessWidget {
-  const ChooseDistrictsWidget({
+class ChooseNeighborhoodWidget extends StatelessWidget {
+  const ChooseNeighborhoodWidget({
     super.key,
   });
   @override
@@ -26,10 +26,16 @@ class ChooseDistrictsWidget extends StatelessWidget {
       child: BlocBuilder<ReportsBloc, ReportsState>(
         builder: (context, state) {
           if (state.status is StatusInitialize) {
-            context.read<ReportsBloc>().add(DistrictsFetch(
-                id: context.watch<ChooseCityProvider>().getCityValue.id ?? 0));
+            context.read<ReportsBloc>().add(NeighborhoodsFetch(
+                cityId:
+                    context.watch<ChooseCityProvider>().getCityValue.id ?? 0,
+                id: context
+                        .watch<ChooseDistrictProvider>()
+                        .getDistrictValue
+                        .id ??
+                    0));
           }
-          return BuildPage(districts: state.districts);
+          return BuildPage(neighborhoods: state.neighborhoods);
         },
       ),
     );
@@ -39,14 +45,14 @@ class ChooseDistrictsWidget extends StatelessWidget {
 class BuildPage extends StatelessWidget {
   const BuildPage({
     super.key,
-    required this.districts,
+    required this.neighborhoods,
   });
 
-  final List<Districts>? districts;
+  final List<Neighborhoods>? neighborhoods;
 
   @override
   Widget build(BuildContext context) {
-    List<Districts>? filtered = districts
+    List<Neighborhoods>? filtered = neighborhoods
         ?.where((element) => element
             .toString()
             .toLowerCase()
@@ -62,7 +68,7 @@ class BuildPage extends StatelessWidget {
                   value.toLowerCase();
             },
             decoration: InputDecoration(
-                hintText: LocaleKeys.mainText_chooseDistrict.tr(),
+                hintText: LocaleKeys.mainText_chooseNeighborhood.tr(),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Theme.of(context).colorScheme.primary)),
@@ -75,15 +81,17 @@ class BuildPage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: filtered?.length ?? 0,
               itemBuilder: (context, index) {
-                Districts? districts = filtered?[index];
+                Neighborhoods? neighborhoods = filtered?[index];
                 return Card(
                   child: ListTile(
                     onTap: () {
-                      context.read<ChooseDistrictProvider>().setDistrictValue =
-                          districts ?? Districts();
+                      context
+                              .read<ChooseNeighborhoodProvider>()
+                              .setNeightborhoodValue =
+                          neighborhoods ?? Neighborhoods();
                       NavigationService.instance.navigateToBack();
                     },
-                    title: Text(districts?.name ?? ""),
+                    title: Text(neighborhoods?.name ?? ""),
                   ),
                 );
               },

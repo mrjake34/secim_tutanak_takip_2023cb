@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../../constants/colors/constant_colors.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../reports_page/view/reports_page.dart';
 import '../../resource_page/view/resource_page.dart';
@@ -14,11 +13,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void> refreshPage() async {
+    setState(() {});
+  }
+
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
   List<Widget> _buildScreens() {
     return [
-      const ReportsPage(),
+      ReportsPage(),
       const ResourcePage(),
     ];
   }
