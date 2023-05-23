@@ -3,12 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:secim_tutanak_takip_2023cb/base/service/navigation/navigation_service.dart';
 
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bottom_sheets/choose_school.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/ballotbox_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/ballotbox_service.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/reports_service.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/view/ballotbox_detail.dart';
 
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../../components/bottom_sheet/bottom_sheet_main.dart';
@@ -41,7 +44,6 @@ class _ReportsPageState extends State<ReportsPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Build $serviceStatus");
     return SmartRefresher(
       controller: refreshController,
       onRefresh: () async {
@@ -165,99 +167,211 @@ class BuildScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(pagePadding),
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.primary)),
-            height: 50,
-            child: ListTile(
-              onTap: () {
-                MainComponents().openBottomSheet(context, ChooseCityWidget());
-              },
-              title: Text(
-                  context.watch<ChooseCityProvider>().getCityValue.name ??
-                      LocaleKeys.mainText_chooseCity.tr()),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(pagePadding),
+        child: Column(
+          children: [
+            const CityField(),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.primary)),
-            height: 50,
-            child: ListTile(
-              onTap: () {
-                MainComponents()
-                    .openBottomSheet(context, const ChooseDistrictsWidget());
-              },
-              title: Text(context
-                      .watch<ChooseDistrictProvider>()
-                      .getDistrictValue
-                      .name ??
-                  LocaleKeys.mainText_chooseDistrict.tr()),
+            const DistrictsField(),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.primary)),
-            height: 50,
-            child: ListTile(
-              onTap: () {
-                MainComponents()
-                    .openBottomSheet(context, const ChooseNeighborhoodWidget());
-              },
-              title: Text(context
-                      .watch<ChooseNeighborhoodProvider>()
-                      .getNeighborhoodValue
-                      .name ??
-                  LocaleKeys.mainText_chooseNeighborhood.tr()),
+            const NeighborhoodField(),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.primary)),
-            height: 50,
-            child: ListTile(
-              onTap: () {
-                MainComponents()
-                    .openBottomSheet(context, const ChooseSchoolWidget());
-              },
-              title: Text(
-                  context.watch<ChooseSchoolProvider>().getSchoolValue.name ??
-                      LocaleKeys.mainText_chooseSchool.tr()),
+            const SchoolField(),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: MainElevatedButton(
-                    buttonFunction: () {
-                      context.read<ReportsBloc>().add(BallotBoxesFetch());
-                    },
-                    buttonWidget:
-                        Text(LocaleKeys.mainText_fetchBallotBoxes.tr())),
-              ),
-            ],
-          )
-        ],
+            const FetchBallotBoxButton(),
+            const SizedBox(
+              height: 20,
+            ),
+            BuildBallotBoxGrid()
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class BuildBallotBoxGrid extends StatelessWidget {
+  BuildBallotBoxGrid({
+    super.key,
+  });
+  List? ballotBoxes;
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.watch<ReportsBloc>().state.ballotBoxes != null) {
+      ballotBoxes = context.watch<ReportsBloc>().state.ballotBoxes;
+      return GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: ballotBoxes?.length,
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          BallotBoxes ballotBox = BallotBoxes.fromJson(ballotBoxes?[index]);
+          return GestureDetector(
+            onTap: () {
+              NavigationService.instance.navigatorKey.currentState
+                  ?.push(MaterialPageRoute(
+                builder: (context) => BallotBoxDetail(ballotBox: ballotBox),
+              ));
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(pagePadding),
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.all(pagePadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(child: Image.asset("assets/images/papers.png")),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "${ballotBox.ballotBoxNumber ?? 0}",
+                      style: contextTitleTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      return Container();
+    }
+  }
+}
+
+class FetchBallotBoxButton extends StatelessWidget {
+  const FetchBallotBoxButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: MainElevatedButton(
+              buttonFunction: () {
+                context.read<ReportsBloc>().add(BallotBoxesFetch());
+              },
+              buttonWidget: Text(LocaleKeys.mainText_fetchBallotBoxes.tr())),
+        ),
+      ],
+    );
+  }
+}
+
+class SchoolField extends StatelessWidget {
+  const SchoolField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(pagePadding),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          )),
+      onTap: () {
+        MainComponents().openBottomSheet(context, const ChooseSchoolWidget());
+      },
+      title: Text(
+          context.watch<ChooseSchoolProvider>().getSchoolValue.schoolName ??
+              LocaleKeys.mainText_chooseSchool.tr()),
+    );
+  }
+}
+
+class NeighborhoodField extends StatelessWidget {
+  const NeighborhoodField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(pagePadding),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          )),
+      onTap: () {
+        MainComponents()
+            .openBottomSheet(context, const ChooseNeighborhoodWidget());
+      },
+      title: Text(context
+              .watch<ChooseNeighborhoodProvider>()
+              .getNeighborhoodValue
+              .neighborName ??
+          LocaleKeys.mainText_chooseNeighborhood.tr()),
+    );
+  }
+}
+
+class DistrictsField extends StatelessWidget {
+  const DistrictsField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(pagePadding),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          )),
+      onTap: () {
+        MainComponents()
+            .openBottomSheet(context, const ChooseDistrictsWidget());
+      },
+      title: Text(context
+              .watch<ChooseDistrictProvider>()
+              .getDistrictValue
+              .districtName ??
+          LocaleKeys.mainText_chooseDistrict.tr()),
+    );
+  }
+}
+
+class CityField extends StatelessWidget {
+  const CityField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(pagePadding),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          )),
+      onTap: () {
+        MainComponents().openBottomSheet(context, ChooseCityWidget());
+      },
+      title: Text(context.watch<ChooseCityProvider>().getCityValue.name ??
+          LocaleKeys.mainText_chooseCity.tr()),
     );
   }
 }

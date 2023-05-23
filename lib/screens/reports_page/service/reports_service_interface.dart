@@ -1,8 +1,7 @@
-import '../model/reports_model.dart';
 
 abstract class IReportsService {
   Future<List?> getListCities();
-  Future<AddressModel?> getListDistricts(int? id);
-  Future<List<Neighborhoods>?> getListNeighborhoods(int? cityId,int? id);
-  Future<List<Schools>?> getListSchools(int? cityId,int? id, int neighborhoodId);
+  Future<List?> getListDistricts(int? id);
+  Future<List?> getListNeighborhoods(int? districtId, int? id);
+  Future<List?> getListSchools(int? cityId, int? districtId, int? neighborhoodId);
 }

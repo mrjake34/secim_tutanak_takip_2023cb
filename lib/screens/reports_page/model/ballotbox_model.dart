@@ -9,12 +9,10 @@ class BallotBoxes {
 
   BallotBoxes.fromJson(Map<String, dynamic> json) {
     ballotBoxNumber = json['ballot_box_number'];
-    cmResult = json['cm_result'] != null
-        ? CmResult.fromJson(json['cm_result'])
-        : null;
-    mvResult = json['mv_result'] != null
-        ? CmResult.fromJson(json['mv_result'])
-        : null;
+    cmResult =
+        json['cm_result'] != null ? CmResult.fromJson(json['cm_result']) : null;
+    mvResult =
+        json['mv_result'] != null ? CmResult.fromJson(json['mv_result']) : null;
     schoolName = json['school_name'];
   }
 
@@ -61,22 +59,23 @@ class CmResult {
 
 class Votes {
   int? i1;
-  int? i3;
-  int? i4;
+  int? i2;
 
-  Votes({this.i1, this.i3, this.i4});
+  Votes({
+    this.i1,
+    this.i2,
+  });
 
   Votes.fromJson(Map<String, dynamic> json) {
     i1 = json['1'];
-    i3 = json['3'];
-    i4 = json['4'];
+    i2 = json['2'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['1'] = i1;
-    data['3'] = i3;
-    data['4'] = i4;
+    data['2'] = i2;
+
     return data;
   }
 }

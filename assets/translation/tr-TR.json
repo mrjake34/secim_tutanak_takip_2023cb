@@ -59,7 +59,15 @@
         "chooseNeighborhood": "Mahalle Seçin",
         "chooseSchool": "Okul Seçin",
         "listEmpty": "Liste Boş",
-        "fetchBallotBoxes": "Sandıkları Getir"
+        "fetchBallotBoxes": "Sandıkları Getir",
+        "ballotBoxNumber": "Sandık No",
+        "reportImage": "Tutanak Fotoğrafı",
+        "reportImageError": "Tutanak Fotoğrafı bulunamadı",
+        "schoolName": "Okul Adı",
+        "votes": "Oylar",
+        "totalVotes": "Toplam Oylar",
+        "erdogan": "Recep Tayyip Erdoğan",
+        "kilicdaroglu": "Kemal Kılıçdaroğlu"
         
 
 

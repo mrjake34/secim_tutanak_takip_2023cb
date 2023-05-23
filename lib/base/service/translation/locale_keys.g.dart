@@ -60,6 +60,14 @@ abstract class  LocaleKeys {
   static const mainText_chooseSchool = 'mainText.chooseSchool';
   static const mainText_listEmpty = 'mainText.listEmpty';
   static const mainText_fetchBallotBoxes = 'mainText.fetchBallotBoxes';
+  static const mainText_ballotBoxNumber = 'mainText.ballotBoxNumber';
+  static const mainText_reportImage = 'mainText.reportImage';
+  static const mainText_reportImageError = 'mainText.reportImageError';
+  static const mainText_schoolName = 'mainText.schoolName';
+  static const mainText_votes = 'mainText.votes';
+  static const mainText_totalVotes = 'mainText.totalVotes';
+  static const mainText_erdogan = 'mainText.erdogan';
+  static const mainText_kilicdaroglu = 'mainText.kilicdaroglu';
   static const mainText = 'mainText';
   static const errorText_requiredEmailLogin = 'errorText.requiredEmailLogin';
   static const errorText_requiredPasswordLogin = 'errorText.requiredPasswordLogin';

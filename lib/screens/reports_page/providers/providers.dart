@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/city_model.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/district_model.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/neighborhood_model.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
+import '../model/schools_test_model.dart';
 
-import '../model/reports_model.dart';
 
 class SearchStringValueProvider extends ChangeNotifier {
   String _searchTerm = "";
@@ -16,69 +19,69 @@ class SearchStringValueProvider extends ChangeNotifier {
 }
 
 class ChooseCityProvider extends ChangeNotifier {
-  AddressModel _city =
-      AddressModel(id: 0, name: LocaleKeys.mainText_chooseCity.tr());
+  CityModel _city =
+      CityModel(id: 0, name: LocaleKeys.mainText_chooseCity.tr());
 
-  AddressModel get getCityValue => _city;
+  CityModel get getCityValue => _city;
 
-  set setCityValue(AddressModel value) {
+  set setCityValue(CityModel value) {
     _city = value;
     notifyListeners();
   }
 }
 
 class ChooseDistrictProvider extends ChangeNotifier {
-  Districts _district =
-      Districts(id: 0, name: LocaleKeys.mainText_chooseDistrict.tr());
-  List<Districts> _districtList = [];
+  DistrictModel _district =
+      DistrictModel(districtId: 0, districtName: LocaleKeys.mainText_chooseDistrict.tr());
+  List<DistrictModel> _districtList = [];
 
-  Districts get getDistrictValue => _district;
-  List<Districts> get getDistrictList => _districtList;
+  DistrictModel get getDistrictValue => _district;
+  List<DistrictModel> get getDistrictList => _districtList;
 
-  set setDistrictList(List<Districts> value) {
+  set setDistrictList(List<DistrictModel> value) {
     _districtList = value;
     notifyListeners();
   }
 
-  set setDistrictValue(Districts value) {
+  set setDistrictValue(DistrictModel value) {
     _district = value;
     notifyListeners();
   }
 }
 
 class ChooseNeighborhoodProvider extends ChangeNotifier {
-  Neighborhoods _neighborhood =
-      Neighborhoods(id: 0, name: LocaleKeys.mainText_chooseNeighborhood.tr());
+  NeighborhoodModel _neighborhood =
+      NeighborhoodModel(neighborId: 0, neighborName: LocaleKeys.mainText_chooseNeighborhood.tr());
   List _neightborhoodList = [];
 
   List get getNeightborhoodList => _neightborhoodList;
-  Neighborhoods get getNeighborhoodValue => _neighborhood;
+  NeighborhoodModel get getNeighborhoodValue => _neighborhood;
 
   set setNeightborhoodList(List value) {
     _neightborhoodList = value;
     notifyListeners();
   }
 
-  set setNeightborhoodValue(Neighborhoods value) {
+  set setNeightborhoodValue(NeighborhoodModel value) {
     _neighborhood = value;
     notifyListeners();
   }
 }
 
 class ChooseSchoolProvider extends ChangeNotifier {
-  Schools _school =
-      Schools(id: 0, name: LocaleKeys.mainText_chooseSchool.tr());
+  SchoolsTest _school =
+      SchoolsTest(schoolName: LocaleKeys.mainText_chooseSchool.tr());
   List _schoolList = [];
 
   List get getSchoolList => _schoolList;
-  Schools get getSchoolValue => _school;
+  SchoolsTest get getSchoolValue => _school;
 
   set setSchoolList(List value) {
     _schoolList = value;
     notifyListeners();
   }
 
-  set setSchoolValue(Schools value) {
+  set setSchoolValue(SchoolsTest value) {
     _school = value;
     notifyListeners();
   }

@@ -7,10 +7,10 @@ import 'package:secim_tutanak_takip_2023cb/base/service/navigation/navigation_se
 import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/city_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/reports_service.dart';
 import '../../../constants/sizes/sizes.dart';
 import '../../../constants/style/text_styles.dart';
-import '../model/reports_model.dart';
 import '../providers/providers.dart';
 import '../service/ballotbox_service.dart';
 
@@ -83,8 +83,8 @@ class BuildWidget extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: filtered.length,
                     itemBuilder: (context, index) {
-                      AddressModel addressModel =
-                          AddressModel.fromJson(filtered[index]);
+                      CityModel addressModel =
+                          CityModel.fromJson(filtered[index]);
                       return Card(
                         child: ListTile(
                           onTap: () {

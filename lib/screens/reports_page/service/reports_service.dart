@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../model/reports_model.dart';
 import 'reports_service_interface.dart';
 
 class ReportsService extends IReportsService {
@@ -12,8 +11,7 @@ class ReportsService extends IReportsService {
     //   citiesPath,
     // );
     try {
-      String jsonString =
-          await rootBundle.loadString('assets/json/bayburt.json');
+      String jsonString = await rootBundle.loadString('assets/json/il.json');
       List cities = json.decode(jsonString);
       return cities;
     } catch (e) {
@@ -29,7 +27,7 @@ class ReportsService extends IReportsService {
   }
 
   @override
-  Future<AddressModel?> getListDistricts(int? id) async {
+  Future<List?> getListDistricts(int? id) async {
     if (id != null) {
       // final response = await dio.get(
       //   "https://api-sonuc.oyveotesi.org/api/v1/cities/$id/districts",
@@ -43,26 +41,25 @@ class ReportsService extends IReportsService {
       // } else if (response.statusCode == 404) {
       // } else {}
       String jsonString =
-          await rootBundle.loadString('assets/json/bayburt.json');
+          await rootBundle.loadString('assets/json/districts.json');
       List districts = json.decode(jsonString);
+
       // print(districts);
       // Districts districts = Districts.fromJson(districts);
       // print(districts.where((element) => element['id'] == id));
+
       final filteredList =
-          districts.singleWhere((element) => element['id'] == id);
+          districts.where((element) => element["city_id"] == id).toList();
 
-      AddressModel addressModel = AddressModel.fromJson(filteredList);
-
-      return addressModel;
+      return filteredList;
     } else {
       return null;
     }
   }
 
   @override
-  Future<List<Neighborhoods>?> getListNeighborhoods(
-      int? cityId, int? id) async {
-    if (id != null && cityId != null) {
+  Future<List?> getListNeighborhoods(int? districtId, int? id) async {
+    if (id != null && districtId != null) {
       // final response = await dio.get(
       //   "https://api-sonuc.oyveotesi.org/api/v1/cities/$id/districts",
       // );
@@ -75,30 +72,24 @@ class ReportsService extends IReportsService {
       // } else if (response.statusCode == 404) {
       // } else {}
       String jsonString =
-          await rootBundle.loadString('assets/json/bayburt.json');
+          await rootBundle.loadString('assets/json/neighborhoods/$id.json');
+
       List districts = json.decode(jsonString);
-      // print(districts);
-      // Districts districts = Districts.fromJson(districts);
-      // print(districts.where((element) => element['id'] == id));
-      final filteredList =
-          districts.singleWhere((element) => element['id'] == cityId);
+      final filteredList = districts
+          .where((element) => element["district_id"] == districtId)
+          .toList();
 
-      AddressModel addressModel = AddressModel.fromJson(filteredList);
-
-      final neighborhoods =
-          addressModel.districts?.singleWhere((element) => element.id == id);
-      List<Neighborhoods>? neighborhoodsList = neighborhoods?.neighborhoods;
-
-      return neighborhoodsList;
+      return filteredList;
     } else {
       return null;
     }
   }
 
   @override
-  Future<List<Schools>?> getListSchools(
-      int? cityId, int? id, int? neighborhoodId) async {
-    if (id != null && cityId != null && neighborhoodId != null) {
+  Future<List?> getListSchools(
+      int? cityId, int? districtId, int? neighborhoodId) async {
+    print("Fetch Schools $cityId $districtId $neighborhoodId");
+    if (cityId != null && districtId != null && neighborhoodId != null) {
       // final response = await dio.get(
       //   "https://api-sonuc.oyveotesi.org/api/v1/cities/$id/districts",
       // );
@@ -111,24 +102,18 @@ class ReportsService extends IReportsService {
       // } else if (response.statusCode == 404) {
       // } else {}
       String jsonString =
-          await rootBundle.loadString('assets/json/bayburt.json');
-      List districts = json.decode(jsonString);
+          await rootBundle.loadString('assets/json/schools.json');
+
+      List schoolList = json.decode(jsonString);
+      print(schoolList);
+
       // print(districts);
       // Districts districts = Districts.fromJson(districts);
       // print(districts.where((element) => element['id'] == id));
-      final filteredList =
-          districts.singleWhere((element) => element['id'] == cityId);
+      // final filteredList = schoolList.where((element) =>
+      //     element['neighborhood_name'] == neighborhoodModel.neighborName);
 
-      AddressModel addressModel = AddressModel.fromJson(filteredList);
-
-      final neighborhoods = addressModel.districts
-          ?.singleWhere((element) => element.id == neighborhoodId);
-      List<Neighborhoods>? neighborhoodsList = neighborhoods?.neighborhoods;
-
-      final schools =
-          neighborhoodsList?.singleWhere((element) => element.id == id);
-
-      return schools?.schools;
+      return schoolList;
     } else {
       return null;
     }

@@ -11,19 +11,19 @@ class CitiesFetch extends ReportsEvent {
 
 @immutable
 class DistrictsFetch extends ReportsEvent {
-  int id;
+  int cityId;
   DistrictsFetch({
-    required this.id,
+    required this.cityId,
   });
   @override
   List<Object?> get props => [];
 }
 
 class NeighborhoodsFetch extends ReportsEvent {
-  int id;
+  int districtId;
   int cityId;
   NeighborhoodsFetch({
-    required this.id,
+    required this.districtId,
     required this.cityId,
   });
   @override
@@ -33,11 +33,11 @@ class NeighborhoodsFetch extends ReportsEvent {
 class SchoolsFetch extends ReportsEvent {
   int neighborhoodId;
   int cityId;
-  int id;
+  int districtId;
   SchoolsFetch({
-    required this.neighborhoodId,
+    required this.districtId,
     required this.cityId,
-    required this.id,
+    required this.neighborhoodId,
   });
   @override
   List<Object?> get props => [];
