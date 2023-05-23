@@ -1,5 +1,8 @@
 # secim_tutanak_takip_2023cb
 
+Uygulama Tamamen bittikten sonra apk, windows ve web olarak çıktı alınacak içerisinden alıp yayınlayabilir ve kulllanabilirsiniz açık kaynak uygulamadır.
+Flutter olduğu için ios da kullanılabilir sadece ios için derleme yapılması gerekmektedir.
+
 ![mobil_ss5](https://github.com/mrjake34/secim_tutanak_takip_2023cb/assets/121731273/f13ec5eb-3626-4810-b739-457d915e36c6)
 ![mobil_ss1](https://github.com/mrjake34/secim_tutanak_takip_2023cb/assets/121731273/b1ba5e69-f18e-4eb9-a83e-e44b4802fcb9)
 ![mobil_ss2](https://github.com/mrjake34/secim_tutanak_takip_2023cb/assets/121731273/c3e72d7a-178e-496c-a65f-f251770a44ab)
