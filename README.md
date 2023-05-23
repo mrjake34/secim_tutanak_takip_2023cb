@@ -6,13 +6,13 @@ Flutter olduğu için ios da kullanılabilir sadece ios için derleme yapılmas�
 Uygulama dosyaları
 https://play.google.com/store/apps/details?id=com.efestech.secim_tutanak_takip_2023cb
 
-Apk
+Apk: 
 secim_tutanak_takip_2023cb\android\app\release
 
-Web
+Web:
 secim_tutanak_takip_2023cb\build\web
 
-Windows
+Windows:
 secim_tutanak_takip_2023cb\build\windows\runner\Release
 
 
