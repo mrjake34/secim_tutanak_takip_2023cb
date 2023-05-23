@@ -3,16 +3,16 @@
 Uygulama Tamamen bittikten sonra apk, windows ve web olarak build edilecek, yazacağım build klasörlerinin içerisinden alıp yayınlayabilir ve kulllanabilirsiniz açık kaynak uygulamadır.
 Flutter olduğu için ios da kullanılabilir sadece ios için derleme yapılması gerekmektedir.
 
-Uygulama dosyaları
+Uygulama dosyaları<br>
 https://play.google.com/store/apps/details?id=com.efestech.secim_tutanak_takip_2023cb
 
-Apk: 
+Apk: <br>
 secim_tutanak_takip_2023cb\android\app\release
 
-Web:
+Web:<br>
 secim_tutanak_takip_2023cb\build\web
 
-Windows:
+Windows:<br>
 secim_tutanak_takip_2023cb\build\windows\runner\Release
 
 
@@ -22,16 +22,3 @@ secim_tutanak_takip_2023cb\build\windows\runner\Release
 ![mobil_ss3](https://github.com/mrjake34/secim_tutanak_takip_2023cb/assets/121731273/25a81895-e352-4ad3-a7ec-6a686387f20a)
 ![mobil_ss4](https://github.com/mrjake34/secim_tutanak_takip_2023cb/assets/121731273/a5a90c58-456b-4675-940a-9d71934d2a7a)
 
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
