@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/city_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/district_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/neighborhood_model.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
-import '../model/schools_test_model.dart';
 
 
 class SearchStringValueProvider extends ChangeNotifier {
@@ -69,19 +69,19 @@ class ChooseNeighborhoodProvider extends ChangeNotifier {
 }
 
 class ChooseSchoolProvider extends ChangeNotifier {
-  SchoolsTest _school =
-      SchoolsTest(schoolName: LocaleKeys.mainText_chooseSchool.tr());
+  SchoolsModel _school =
+      SchoolsModel(name: LocaleKeys.mainText_chooseSchool.tr());
   List _schoolList = [];
 
   List get getSchoolList => _schoolList;
-  SchoolsTest get getSchoolValue => _school;
+  SchoolsModel get getSchoolValue => _school;
 
   set setSchoolList(List value) {
     _schoolList = value;
     notifyListeners();
   }
 
-  set setSchoolValue(SchoolsTest value) {
+  set setSchoolValue(SchoolsModel value) {
     _school = value;
     notifyListeners();
   }

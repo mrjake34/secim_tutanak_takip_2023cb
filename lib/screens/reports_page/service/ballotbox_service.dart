@@ -1,16 +1,28 @@
-import 'dart:convert';
 
-import 'package:flutter/services.dart';
+import 'package:dio/dio.dart';
 
 import 'ballotbox_service_interface.dart';
 
 class BallotBoxService extends IBallotBoxService {
+  Dio dio = Dio();
   @override
-  Future fetchBallotBoxes() async {
-    String jsonString =
-        await rootBundle.loadString('assets/json/ballotbox_test.json');
-    List cities = json.decode(jsonString);
+  Future<List?> fetchBallotBoxes(int? schoolsId) async {
+    if (schoolsId == null) return null;
+    final response = await dio.get(
+      "https://api-sonuc.oyveotesi.org/api/v1/submission/school/$schoolsId",
+    );
 
-    return cities;
+    if (response.statusCode == 200) {
+      List? districts = response.data;
+
+      return districts;
+    }
+    return null;
+
+    // String jsonString =
+    //     await rootBundle.loadString('assets/json/ballotbox_test.json');
+    // List cities = json.decode(jsonString);
+
+    // return cities;
   }
 }

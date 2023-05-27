@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 
 import 'reports_service_interface.dart';
 
 class ReportsService extends IReportsService {
+  Dio dio = Dio();
+
   @override
   Future<List?> getListCities() async {
     // final response = await dio.get(
@@ -88,24 +91,21 @@ class ReportsService extends IReportsService {
   @override
   Future<List?> getListSchools(
       int? cityId, int? districtId, int? neighborhoodId) async {
-    print("Fetch Schools $cityId $districtId $neighborhoodId");
     if (cityId != null && districtId != null && neighborhoodId != null) {
-      // final response = await dio.get(
-      //   "https://api-sonuc.oyveotesi.org/api/v1/cities/$id/districts",
-      // );
+      final response = await dio.get(
+        "https://api-sonuc.oyveotesi.org/api/v1/cities/$cityId/districts/$districtId/neighborhoods/$neighborhoodId/schools",
+      );
 
-      // if (response.statusCode == 200) {
-      //   List? districts = response.data;
-      //   print(districts);
-      //   emit(DistrictsState(districts ?? []));
-      // } else if (response.statusCode == 400) {
-      // } else if (response.statusCode == 404) {
-      // } else {}
-      String jsonString =
-          await rootBundle.loadString('assets/json/schools.json');
+      if (response.statusCode == 200) {
+        List? districts = response.data;
 
-      List schoolList = json.decode(jsonString);
-      print(schoolList);
+        return districts;
+      } 
+      // String jsonString =
+      //     await rootBundle.loadString('assets/json/schools.json');
+
+      // List schoolList = json.decode(jsonString);
+      // print(schoolList);
 
       // print(districts);
       // Districts districts = Districts.fromJson(districts);
@@ -113,9 +113,10 @@ class ReportsService extends IReportsService {
       // final filteredList = schoolList.where((element) =>
       //     element['neighborhood_name'] == neighborhoodModel.neighborName);
 
-      return schoolList;
+      // return schoolList;
     } else {
       return null;
     }
+    return null;
   }
 }

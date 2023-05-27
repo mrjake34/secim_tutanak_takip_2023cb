@@ -44,9 +44,14 @@ class SchoolsFetch extends ReportsEvent {
 }
 
 class BallotBoxesFetch extends ReportsEvent {
+  int? schoolId;
+  BallotBoxesFetch({
+    this.schoolId,
+  });
   @override
   List<Object?> get props => [];
 }
+
 class ServiceEnabled extends ReportsEvent {
   @override
   List<Object?> get props => [];

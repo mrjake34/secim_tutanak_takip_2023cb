@@ -20,7 +20,7 @@ class ReportsState extends Equatable {
   final CityModel? city;
   final DistrictModel? district;
   final NeighborhoodModel? neighborhood;
-  final SchoolsModelJson? school;
+  final SchoolsModel? school;
   final List districts;
   final List? neighborhoods;
   final List? schools;
@@ -49,7 +49,7 @@ class ReportsState extends Equatable {
     CityModel? city,
     DistrictModel? district,
     NeighborhoodModel? neighborhood,
-    SchoolsModelJson? school,
+    SchoolsModel? school,
     List? districts,
     List? neighborhoods,
     List? schools,

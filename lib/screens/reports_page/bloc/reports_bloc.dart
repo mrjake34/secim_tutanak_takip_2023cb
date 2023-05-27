@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/city_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/district_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/neighborhood_model.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model_json.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/ballotbox_service.dart';
 import 'reports_status.dart';
 import '../service/reports_service.dart';
@@ -43,7 +45,8 @@ class ReportsBloc extends Bloc<ReportsEvent, ReportsState> {
       await fetchListSchools(event, emit, districtId, cityId, neighborhoodId);
     });
     on<BallotBoxesFetch>((event, emit) async {
-      await fetchBallotBox(event, emit);
+      int? schoolId = event.schoolId;
+      await fetchBallotBox(event, emit, schoolId);
     });
     on<ServiceEnabled>((event, emit) async {
       await serviceCheck(event, emit);
@@ -98,7 +101,7 @@ class ReportsBloc extends Bloc<ReportsEvent, ReportsState> {
       emit(state.copyWith(status: ReportLoading()));
       try {
         final response =
-            await service?.getListSchools(cityId,districtId, neighborhoodId);
+            await service?.getListSchools(cityId, districtId, neighborhoodId);
         emit(state.copyWith(status: ReportSuccess(), schools: response));
       } catch (e) {
         emit(state.copyWith(status: ReportError(e)));
@@ -106,30 +109,31 @@ class ReportsBloc extends Bloc<ReportsEvent, ReportsState> {
     }
   }
 
-  Future fetchBallotBox(ReportsEvent event, Emitter<ReportsState> emit) async {
+  Future fetchBallotBox(
+      ReportsEvent event, Emitter<ReportsState> emit, int? schoolsId) async {
     if (event is BallotBoxesFetch) {
       emit(state.copyWith(status: ReportLoading()));
-      // try {
-      List response = await boxService.fetchBallotBoxes();
-      emit(state.copyWith(status: ReportSuccess(), ballotBoxes: response));
-      //   } catch (e) {
-      //     emit(state.copyWith(status: ReportError(e)));
-      //   }
+      try {
+        List? response = await boxService.fetchBallotBoxes(schoolsId);
+        emit(state.copyWith(status: ReportSuccess(), ballotBoxes: response));
+      } catch (e) {
+        emit(state.copyWith(status: ReportError(e)));
+      }
     }
   }
 
   Future serviceCheck(ReportsEvent event, Emitter<ReportsState> emit) async {
     try {
-      return emit(state.copyWith(serviceStatus: NetworkReady()));
-      // final response = await dio.get(
-      //   "https://api-sonuc.oyveotesi.org/api/v1/cities",
-      // );
-      // print(response.statusCode);
-      // if (response.statusCode == HttpStatus.ok) {
-      //   return emit(state.copyWith(serviceStatus: NetworkReady()));
-      // } else {
-      //   return emit(state.copyWith(serviceStatus: NetworkFailed()));
-      // }
+      // return emit(state.copyWith(serviceStatus: NetworkReady()));
+      final response = await dio.get(
+        "https://api-sonuc.oyveotesi.org/api/v1/cities",
+      );
+      print(response.statusCode);
+      if (response.statusCode == HttpStatus.ok) {
+        return emit(state.copyWith(serviceStatus: NetworkReady()));
+      } else {
+        return emit(state.copyWith(serviceStatus: NetworkFailed()));
+      }
       // print(response);
       // await Future.delayed(const Duration(seconds: 2));
     } on DioError catch (e) {

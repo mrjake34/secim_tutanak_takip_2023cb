@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model_json.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_test_model.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/ballotbox_service.dart';
 
 import '../../../base/service/navigation/navigation_service.dart';
@@ -89,7 +88,7 @@ class BuildPage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: filtered?.length ?? 0,
               itemBuilder: (context, index) {
-                SchoolsTest? schools = SchoolsTest.fromJson(filtered?[index]);
+                SchoolsModel? schools = SchoolsModel.fromJson(filtered?[index]);
                 return Card(
                   child: ListTile(
                     onTap: () {
@@ -97,7 +96,7 @@ class BuildPage extends StatelessWidget {
                           schools;
                       NavigationService.instance.navigateToBack();
                     },
-                    title: Text(schools.schoolName ?? ""),
+                    title: Text(schools.name ?? ""),
                   ),
                 );
               },

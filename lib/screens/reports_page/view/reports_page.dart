@@ -270,7 +270,7 @@ class FetchBallotBoxButton extends StatelessWidget {
         Expanded(
           child: MainElevatedButton(
               buttonFunction: () {
-                context.read<ReportsBloc>().add(BallotBoxesFetch());
+                context.read<ReportsBloc>().add(BallotBoxesFetch(schoolId: context.read<ChooseSchoolProvider>().getSchoolValue.id));
               },
               buttonWidget: Text(LocaleKeys.mainText_fetchBallotBoxes.tr())),
         ),
@@ -296,7 +296,7 @@ class SchoolField extends StatelessWidget {
         MainComponents().openBottomSheet(context, const ChooseSchoolWidget());
       },
       title: Text(
-          context.watch<ChooseSchoolProvider>().getSchoolValue.schoolName ??
+          context.watch<ChooseSchoolProvider>().getSchoolValue.name ??
               LocaleKeys.mainText_chooseSchool.tr()),
     );
   }

@@ -14,10 +14,10 @@ ThemeData darkTheme = ThemeData(
       error: Colors.red,
       onError: Colors.redAccent,
       //Scaffold Background
-      background: Color.fromARGB(255, 26, 26, 46),
+      background: Color.fromARGB(255, 54, 51, 51),
       onBackground: Color.fromARGB(255, 166, 166, 166),
       //Scaffold Color and Cards
-      surface: Color.fromARGB(255, 22, 33, 62),
+      surface: Color.fromARGB(255, 39, 33, 33),
       onSurface: Colors.white70,
       //Card Text
       tertiary: Color.fromARGB(255, 210, 210, 210),
@@ -31,8 +31,8 @@ ThemeData darkTheme = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             textStyle: const TextStyle(fontWeight: FontWeight.bold),
-            foregroundColor: const Color.fromARGB(255, 210, 210, 210),
-            backgroundColor: Colors.lightBlue,
+            foregroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 225, 100, 40),
             side: BorderSide.none,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(2.0)))),
