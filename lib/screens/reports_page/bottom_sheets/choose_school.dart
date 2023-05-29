@@ -1,16 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/city/city_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_model.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/ballotbox_service.dart';
 
 import '../../../base/service/navigation/navigation_service.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../../constants/sizes/sizes.dart';
-import '../bloc/reports_bloc.dart';
+import '../blocs/reports/reports_bloc.dart';
 import '../providers/providers.dart';
-import '../service/reports_service.dart';
 
 // ignore: must_be_immutable
 class ChooseSchoolWidget extends StatelessWidget {
@@ -19,32 +17,23 @@ class ChooseSchoolWidget extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ReportsBloc(
-          service: ReportsService(),
-          context: context,
-          boxService: BallotBoxService()),
-      child: BlocBuilder<ReportsBloc, ReportsState>(
-        builder: (context, state) {
-          if (state.status is StatusInitialize) {
-            context.read<ReportsBloc>().add(SchoolsFetch(
-                  neighborhoodId: context
-                          .watch<ChooseNeighborhoodProvider>()
-                          .getNeighborhoodValue
-                          .neighborId ??
-                      0,
-                  districtId: context
-                          .watch<ChooseDistrictProvider>()
-                          .getDistrictValue
-                          .districtId ??
-                      0,
-                  cityId:
-                      context.watch<ChooseCityProvider>().getCityValue.id ?? 0,
-                ));
-          }
-          return BuildPage(schools: state.schools);
-        },
-      ),
+    context.read<ReportsBloc>().add(SchoolsFetch(
+          neighborhoodId: context
+                  .watch<ChooseNeighborhoodProvider>()
+                  .getNeighborhoodValue
+                  .neighborId ??
+              0,
+          districtId: context
+                  .watch<ChooseDistrictProvider>()
+                  .getDistrictValue
+                  .districtId ??
+              0,
+          cityId: context.watch<CityBloc>().state.city?.id ?? 0,
+        ));
+    return BlocBuilder<ReportsBloc, ReportsState>(
+      builder: (context, state) {
+        return BuildPage(schools: state.schools);
+      },
     );
   }
 }

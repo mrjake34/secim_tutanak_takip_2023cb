@@ -32,24 +32,9 @@ class ReportsService extends IReportsService {
   @override
   Future<List?> getListDistricts(int? id) async {
     if (id != null) {
-      // final response = await dio.get(
-      //   "https://api-sonuc.oyveotesi.org/api/v1/cities/$id/districts",
-      // );
-
-      // if (response.statusCode == 200) {
-      //   List? districts = response.data;
-      //   print(districts);
-      //   emit(DistrictsState(districts ?? []));
-      // } else if (response.statusCode == 400) {
-      // } else if (response.statusCode == 404) {
-      // } else {}
       String jsonString =
           await rootBundle.loadString('assets/json/districts.json');
       List districts = json.decode(jsonString);
-
-      // print(districts);
-      // Districts districts = Districts.fromJson(districts);
-      // print(districts.where((element) => element['id'] == id));
 
       final filteredList =
           districts.where((element) => element["city_id"] == id).toList();
@@ -100,7 +85,7 @@ class ReportsService extends IReportsService {
         List? districts = response.data;
 
         return districts;
-      } 
+      }
       // String jsonString =
       //     await rootBundle.loadString('assets/json/schools.json');
 

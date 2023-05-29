@@ -1,16 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/neighborhoods/neighborhoods_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/neighborhood_model.dart';
 
 import '../../../base/service/navigation/navigation_service.dart';
 import '../../../base/service/translation/locale_keys.g.dart';
 import '../../../constants/sizes/sizes.dart';
-import '../bloc/reports_bloc.dart';
+
 import '../providers/providers.dart';
-import '../service/ballotbox_service.dart';
-import '../service/reports_service.dart';
 
 // ignore: must_be_immutable
 class ChooseNeighborhoodWidget extends StatelessWidget {
@@ -19,26 +17,22 @@ class ChooseNeighborhoodWidget extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ReportsBloc(
-          service: ReportsService(),
-          context: context,
-          boxService: BallotBoxService()),
-      child: BlocBuilder<ReportsBloc, ReportsState>(
-        builder: (context, state) {
-          if (state.status is StatusInitialize) {
-            context.read<ReportsBloc>().add(NeighborhoodsFetch(
-                cityId:
-                    context.watch<ChooseCityProvider>().getCityValue.id ?? 0,
-                districtId: context
-                        .watch<ChooseDistrictProvider>()
-                        .getDistrictValue
-                        .districtId ??
-                    0));
-          }
-          return BuildPage(neighborhoods: state.neighborhoods);
-        },
-      ),
+    BlocProvider.of<NeighborhoodsBloc>(context).add(NeighborhoodsEvent(
+        cityId: context.watch<ChooseCityProvider>().getCityValue.id,
+        districtsId: context
+            .watch<ChooseDistrictProvider>()
+            .getDistrictValue
+            .districtId));
+    return BlocBuilder<NeighborhoodsBloc, NeighborhoodsState>(
+      builder: (context, state) {
+        if (state.model?.isNotEmpty ?? false) {
+          return BuildPage(state: state);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
+      },
     );
   }
 }
@@ -46,14 +40,14 @@ class ChooseNeighborhoodWidget extends StatelessWidget {
 class BuildPage extends StatelessWidget {
   const BuildPage({
     super.key,
-    required this.neighborhoods,
+    required this.state,
   });
 
-  final List? neighborhoods;
+  final NeighborhoodsState state;
 
   @override
   Widget build(BuildContext context) {
-    List? filtered = neighborhoods
+    List? filtered = state.model
         ?.where((element) => element
             .toString()
             .toLowerCase()

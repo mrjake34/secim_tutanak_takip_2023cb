@@ -3,5 +3,5 @@ class NavigationConstants {
   static const homePage = '/homePage';
   static const genelgePage = '/genelgePage';
   static const profile = '/profile';
-  
+  static const ballotBoxes = '/ballotBoxes';
 }

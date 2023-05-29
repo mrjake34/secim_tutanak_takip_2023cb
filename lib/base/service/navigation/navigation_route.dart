@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/view/ballotbox_list.dart';
 
 import '../../../constants/navigation/navigation.dart';
 import '../../../screens/genelge_page/view/genelge_page.dart';
@@ -17,6 +18,9 @@ class NavigationRoute {
       case NavigationConstants.genelgePage:
         return normalNavigate(
             const GenelgePage(), NavigationConstants.genelgePage);
+            case NavigationConstants.ballotBoxes:
+        return normalNavigate(
+            const BuildBallotBoxGrid(), NavigationConstants.ballotBoxes);
       default:
         return MaterialPageRoute(
             builder: (BuildContext context) => const NotFoundPage());

@@ -5,61 +5,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secim_tutanak_takip_2023cb/base/service/navigation/navigation_service.dart';
 import 'package:secim_tutanak_takip_2023cb/base/service/translation/locale_keys.g.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_bloc.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/bloc/reports_status.dart';
+import 'package:secim_tutanak_takip_2023cb/constants/enums/bloc_status.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/city/city_bloc.dart';
+
 import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/city_model.dart';
-import 'package:secim_tutanak_takip_2023cb/screens/reports_page/service/reports_service.dart';
 import '../../../constants/sizes/sizes.dart';
 import '../../../constants/style/text_styles.dart';
 import '../providers/providers.dart';
-import '../service/ballotbox_service.dart';
 
 class ChooseCityWidget extends StatelessWidget {
-  ChooseCityWidget({super.key});
-
-  final ReportsService service = ReportsService();
+  const ChooseCityWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ReportsBloc(service: ReportsService(), context: context, boxService: BallotBoxService());
-    return BlocProvider(
-        create: (context) => bloc,
-        child: BlocBuilder<ReportsBloc, ReportsState>(
-          builder: (context, state) {
-            if (state.status is StatusInitialize) {
-              context.read<ReportsBloc>().add(CitiesFetch());
-            }
-            return BuildWidget(
-              service: service,
-              state: state,
-              bloc: bloc,
-            );
-          },
-        ));
+    BlocProvider.of<CityBloc>(context).add(const CityEvent());
+    return BlocBuilder<CityBloc, CityState>(
+      builder: (context, state) {
+        return BuildWidget(
+          state: state,
+        );
+      },
+    );
   }
 }
 
 class BuildWidget extends StatelessWidget {
   const BuildWidget({
     super.key,
-    required this.service,
     required this.state,
-    required this.bloc,
   });
 
-  final ReportsService service;
-  final ReportsState state;
-  final ReportsBloc bloc;
+  final CityState state;
 
   @override
   Widget build(BuildContext context) {
     List? filtered = state.cities
-        .where((element) => element
+        ?.where((element) => element
             .toString()
             .toLowerCase()
             .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
         .toList();
-    return state.status is ReportSuccess
+    return state.status == Status.success
         ? Padding(
             padding: const EdgeInsets.all(pagePadding),
             child: Column(
@@ -81,10 +67,10 @@ class BuildWidget extends StatelessWidget {
                 Flexible(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: filtered.length,
+                    itemCount: filtered?.length,
                     itemBuilder: (context, index) {
                       CityModel addressModel =
-                          CityModel.fromJson(filtered[index]);
+                          CityModel.fromJson(filtered?[index]);
                       return Card(
                         child: ListTile(
                           onTap: () {
@@ -102,7 +88,7 @@ class BuildWidget extends StatelessWidget {
               ],
             ),
           )
-        : state.status is ReportLoading
+        : state.status == Status.loading
             ? const LoadingWidget()
             : const ErrorWidget();
   }

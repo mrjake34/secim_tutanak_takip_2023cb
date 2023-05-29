@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       PersistentTabController(initialIndex: 0);
   List<Widget> _buildScreens() {
     return [
-      ReportsPage(),
+      const ReportsPage(),
       const ResourcePage(),
     ];
   }

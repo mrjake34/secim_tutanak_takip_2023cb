@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import 'ballotbox_service_interface.dart';
@@ -13,9 +12,8 @@ class BallotBoxService extends IBallotBoxService {
     );
 
     if (response.statusCode == 200) {
-      List? districts = response.data;
-
-      return districts;
+      List? boxes = response.data;
+      return boxes;
     }
     return null;
 

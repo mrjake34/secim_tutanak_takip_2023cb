@@ -1,0 +1,1 @@
+enum Status {success, error, loading, citiesEmpty, networkReady, networkNotReady, networkLoading, networkError}

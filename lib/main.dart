@@ -1,6 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/ballotbox/fetch_ballot_boxes_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/city/city_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/districts/districts_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/neighborhoods/neighborhoods_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/reports/reports_bloc.dart';
+import 'package:secim_tutanak_takip_2023cb/screens/reports_page/blocs/schools/schools_bloc.dart';
 
 import 'base/service/navigation/navigation_route.dart';
 import 'base/service/navigation/navigation_service.dart';
@@ -17,13 +24,30 @@ void main() {
       path: "assets/translation",
       supportedLocales: TranslationManager.instance!.supportedLocales,
       startLocale: TranslationManager.instance!.trLocale,
-      child: const MyApp()));
+      child: MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (context) => ReportsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FetchBallotBoxesBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CityBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DistrictsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => NeighborhoodsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SchoolsBloc(),
+        ),
+      ], child: const MyApp())));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -33,11 +57,11 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
             create: (context) => SearchStringValueProvider()),
-        ChangeNotifierProvider(create: (context) => ChooseCityProvider()),
         ChangeNotifierProvider(create: (context) => ChooseDistrictProvider()),
         ChangeNotifierProvider(
             create: (context) => ChooseNeighborhoodProvider()),
         ChangeNotifierProvider(create: (context) => ChooseSchoolProvider()),
+        ChangeNotifierProvider(create: (context) => ChooseCityProvider()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
