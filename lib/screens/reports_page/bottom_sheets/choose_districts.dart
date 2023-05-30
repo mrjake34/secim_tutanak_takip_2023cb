@@ -46,7 +46,7 @@ class BuildPage extends StatelessWidget {
         ?.where((element) => element
             .toString()
             .toLowerCase()
-            .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
+            .contains(context.watch<SearchStringValueProviderDistricts>().getSearchTerm))
         .toList();
     return Padding(
       padding: const EdgeInsets.all(pagePadding),
@@ -54,7 +54,7 @@ class BuildPage extends StatelessWidget {
         children: [
           TextFormField(
             onChanged: (value) {
-              context.read<SearchStringValueProvider>().setSearchTerm =
+              context.read<SearchStringValueProviderDistricts>().setSearchTerm =
                   value.toLowerCase();
             },
             decoration: InputDecoration(

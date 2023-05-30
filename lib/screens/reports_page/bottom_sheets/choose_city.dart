@@ -39,11 +39,12 @@ class BuildWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     List? filtered = state.cities
         ?.where((element) => element
             .toString()
             .toLowerCase()
-            .contains(context.watch<SearchStringValueProvider>().getSearchTerm))
+            .contains(context.watch<SearchStringValueProviderCities>().getSearchTerm))
         .toList();
     return state.status == Status.success
         ? Padding(
@@ -52,7 +53,7 @@ class BuildWidget extends StatelessWidget {
               children: [
                 TextFormField(
                   onChanged: (value) {
-                    context.read<SearchStringValueProvider>().setSearchTerm =
+                    context.read<SearchStringValueProviderCities>().setSearchTerm =
                         value.toLowerCase();
                   },
                   decoration: InputDecoration(

@@ -56,7 +56,13 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchBarProviderGenelge(),
         ),
         ChangeNotifierProvider(
-            create: (context) => SearchStringValueProvider()),
+            create: (context) => SearchStringValueProviderCities()),
+            ChangeNotifierProvider(
+            create: (context) => SearchStringValueProviderDistricts()),
+            ChangeNotifierProvider(
+            create: (context) => SearchStringValueProviderNeighborhoods()),
+            ChangeNotifierProvider(
+            create: (context) => SearchStringValueProviderSchools()),
         ChangeNotifierProvider(create: (context) => ChooseDistrictProvider()),
         ChangeNotifierProvider(
             create: (context) => ChooseNeighborhoodProvider()),

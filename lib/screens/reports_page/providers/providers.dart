@@ -7,7 +7,7 @@ import 'package:secim_tutanak_takip_2023cb/screens/reports_page/model/schools_mo
 import '../../../base/service/translation/locale_keys.g.dart';
 
 
-class SearchStringValueProvider extends ChangeNotifier {
+class SearchStringValueProviderCities extends ChangeNotifier {
   String _searchTerm = "";
 
   String get getSearchTerm => _searchTerm;
@@ -17,6 +17,37 @@ class SearchStringValueProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+class SearchStringValueProviderDistricts extends ChangeNotifier {
+  String _searchTerm = "";
+
+  String get getSearchTerm => _searchTerm;
+
+  set setSearchTerm(String value) {
+    _searchTerm = value;
+    notifyListeners();
+  }
+}
+class SearchStringValueProviderNeighborhoods extends ChangeNotifier {
+  String _searchTerm = "";
+
+  String get getSearchTerm => _searchTerm;
+
+  set setSearchTerm(String value) {
+    _searchTerm = value;
+    notifyListeners();
+  }
+}
+class SearchStringValueProviderSchools extends ChangeNotifier {
+  String _searchTerm = "";
+
+  String get getSearchTerm => _searchTerm;
+
+  set setSearchTerm(String value) {
+    _searchTerm = value;
+    notifyListeners();
+  }
+}
+
 
 class ChooseCityProvider extends ChangeNotifier {
   CityModel _city =
