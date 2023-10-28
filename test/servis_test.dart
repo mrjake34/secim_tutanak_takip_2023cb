@@ -12,8 +12,8 @@ void main() {
     final response = await service.getListCities();
 
     expect(
-      response,
-      Matcher,
+      response is List,
+      true,
     );
   });
 }
